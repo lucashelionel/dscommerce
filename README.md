@@ -1,1 +1,1 @@
-projeto de e-commerce com para aprendizagem do uso do Framework Spring Boot 
+projeto de e-commerce para aprendizagem do uso do Framework Spring Boot 
