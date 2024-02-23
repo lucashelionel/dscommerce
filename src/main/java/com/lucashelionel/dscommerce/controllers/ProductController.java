@@ -5,11 +5,14 @@ import com.lucashelionel.dscommerce.entities.Product;
 import com.lucashelionel.dscommerce.repositories.ProductRepository;
 import com.lucashelionel.dscommerce.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -22,5 +25,11 @@ public class ProductController {
         ProductDTO dto = service.findById(id);
         return dto;
         // ou simplemente: return service.findById(id);
+    }
+    // pageable serve para paginar o retorno dos dados sem que venham todos de uma vez
+    //por padrão ele retorna uma lista com 20 elementos
+    @GetMapping
+    public Page<ProductDTO> findAll(Pageable pageable){
+        return service.findAll(pageable);
     }
 }
