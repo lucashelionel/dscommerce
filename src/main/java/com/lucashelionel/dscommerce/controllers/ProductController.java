@@ -4,6 +4,7 @@ import com.lucashelionel.dscommerce.dto.ProductDTO;
 import com.lucashelionel.dscommerce.entities.Product;
 import com.lucashelionel.dscommerce.repositories.ProductRepository;
 import com.lucashelionel.dscommerce.services.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -39,9 +40,10 @@ public class ProductController {
 
     }
 
-
+    // @RequestBodypara indicar que é o corpo da requisição
+    //@valid para iniciar a preparação e passar pelas validaçoes que estão no DTO
     @PostMapping
-    public ResponseEntity <ProductDTO> insert(@RequestBody ProductDTO dto) // para indicar que é o corpo da requisição
+    public ResponseEntity <ProductDTO> insert(@Valid @RequestBody ProductDTO dto)
     {
         dto = service.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
@@ -50,7 +52,7 @@ public class ProductController {
 
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity <ProductDTO> update(@PathVariable Long id, @RequestBody ProductDTO dto){
+    public ResponseEntity <ProductDTO> update(@PathVariable Long id, @Valid @RequestBody ProductDTO dto){
         dto = service.update(id, dto);
         return ResponseEntity.ok(dto);
     }

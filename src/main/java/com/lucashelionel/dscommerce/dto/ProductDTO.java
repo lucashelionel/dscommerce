@@ -2,12 +2,21 @@ package com.lucashelionel.dscommerce.dto;
 
 import com.lucashelionel.dscommerce.entities.Product;
 import jakarta.persistence.Column;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 
+//validações se colocam na classe DTO, o dto que coresponde ao JSON
 public class ProductDTO {
 
     private Long id;
+    @Size(min = 3, max = 80, message = "Nome precisa ter de 3 a 80 caracteres")
+    @NotBlank(message = "Campo Requerido!!!")
     private String name;
+    @Size(min = 10, message = "A descrição deve ter no mínimo 10 caracteres")
+    @NotBlank(message = "Campo Requerido!!!")
     private String description;
+    @Positive(message = "O preço deve ser positivo")
     private double price;
     private String imgUrl;
 
